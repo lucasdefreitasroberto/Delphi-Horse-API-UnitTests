@@ -25,5 +25,5 @@ This is a backend application built with Delphi using the Horse framework. The p
 1. **Clone the repository:** :heavy_plus_sign:
 
 ```sh
-git clone https://github.com/lucasdefreitasroberto/Delphi_Horse_-_TesteUnitario
-cd Delphi_Horse_-_TesteUnitario
+git clone https://github.com/lucasdefreitasroberto/Delphi-Horse-API-UnitTests
+cd DDelphi-Horse-API-UnitTests
