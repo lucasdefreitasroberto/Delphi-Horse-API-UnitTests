@@ -20,7 +20,7 @@ export default function Grid(){
             <TableHead className="w-[100px]">Código</TableHead>
             <TableHead className="w-[600px]">Descrição</TableHead>
             <TableHead className="w-[200px]">Preço</TableHead>
-            <TableHead className="text-left ">Ações</TableHead>
+            <TableHead className="w-[50px]">Ações</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

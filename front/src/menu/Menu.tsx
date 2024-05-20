@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ModeToggle } from "../components/themeMenu";
+import { MenubarTrigger } from "@radix-ui/react-menubar";
 
 import {
   Menubar,
@@ -14,22 +15,26 @@ import {
 } from "@/components/ui/menubar";
 
 import Product from "../product/Product";
-import { MenubarTrigger } from "@radix-ui/react-menubar";
+import Person from "../person/Person";
 
 export function Menu() {
-  // State to manage the visibility of the Product form
   const [isProductFormVisible, setProductFormVisible] = useState(false);
+  const [isPersonFormVisible, setPersonFormVisible] = useState(false);
 
-  // Function to handle the click on the "Produto" menu item
   const handleProdutoClick = () => {
-    // Open the Product form by setting the state to true
     setProductFormVisible(true);
+    setPersonFormVisible(false);
+  };
+
+  const handlePersonClick = () => {
+    setPersonFormVisible(true);
+    setProductFormVisible(false);
   };
 
   return (
     <div>
-      <Menubar className=" size-2/12 w-full  ">
-        <div className="p-3 max-w-64 mx-auto ">
+      <Menubar className="size-2/12 w-full">
+        <div className="p-3 max-w-64 mx-auto">
           <div>
             <Menubar className="border">
               <MenubarMenu>
@@ -42,17 +47,18 @@ export function Menu() {
                       Cadastro <MenubarShortcut>⌘C</MenubarShortcut>
                     </MenubarSubTrigger>
                     <MenubarSubContent>
-                      {/* Attach the click handler to the "Produto" menu item */}
                       <MenubarItem onClick={handleProdutoClick}>
                         Produtos
                       </MenubarItem>
-                      <MenubarItem>Pessoas</MenubarItem>
+                      <MenubarItem onClick={handlePersonClick}>
+                        Pessoas
+                      </MenubarItem>
                     </MenubarSubContent>
                   </MenubarSub>
                   <MenubarSeparator />
                   <MenubarSub>
                     <MenubarSubTrigger>
-                      Relatórios<MenubarShortcut>⌘R</MenubarShortcut>
+                      Relatórios <MenubarShortcut>⌘R</MenubarShortcut>
                     </MenubarSubTrigger>
                     <MenubarSubContent>
                       <MenubarItem disabled>Produtos</MenubarItem>
@@ -67,8 +73,8 @@ export function Menu() {
         <ModeToggle />
       </Menubar>
 
-      {/* Render the Product form based on the state */}
       {isProductFormVisible && <Product />}
+      {isPersonFormVisible && <Person />}
     </div>
   );
 }
