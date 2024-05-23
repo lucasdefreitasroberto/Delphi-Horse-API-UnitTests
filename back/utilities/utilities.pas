@@ -11,7 +11,8 @@ type
     ['{FD8231AB-EE6C-4B74-933D-5CE48B1C3024}']
     function ExecuteScalar(const SQL: string): Variant;
     function ExecuteReader(const SQL: string): TDataSet;
-    procedure ExecuteCommand(const SQL: string; const Params: array of Variant; const ParamNames: array of string);
+    procedure ExecuteCommand(const SQL: string; const Params: array of Variant;
+      const ParamNames: array of string);
   end;
 
   TQueryExecutor = class(TInterfacedObject, IQueryExecutor)
@@ -22,7 +23,8 @@ type
     constructor Create(AConnection: TFDConnection);
     function ExecuteScalar(const SQL: string): Variant;
     function ExecuteReader(const SQL: string): TDataSet;
-    procedure ExecuteCommand(const SQL: string; const Params: array of Variant; const ParamNames: array of string);
+    procedure ExecuteCommand(const SQL: string; const Params: array of Variant;
+      const ParamNames: array of string);
   end;
 
   TMethods = class
@@ -90,7 +92,8 @@ begin
   end;
 end;
 
-procedure TQueryExecutor.ExecuteCommand(const SQL: string; const Params: array of Variant; const ParamNames: array of string);
+procedure TQueryExecutor.ExecuteCommand(const SQL: string;
+  const Params: array of Variant; const ParamNames: array of string);
 var
   Query: TFDQuery;
   I: Integer;
@@ -117,7 +120,8 @@ function TMethods.GetNextPessoaID: Integer;
 var
   NextID: Variant;
 begin
-  NextID := FQueryExecutor.ExecuteScalar('select coalesce(max(P.ID), 0) + 1 from PESSOA P');
+  NextID := FQueryExecutor.ExecuteScalar
+    ('select coalesce(max(P.ID), 0) + 1 from PESSOA P');
   if VarIsNull(NextID) then
     Result := 1 // Caso não haja registros, retornar 1 como próximo ID
   else
@@ -145,4 +149,3 @@ begin
 end;
 
 end.
-

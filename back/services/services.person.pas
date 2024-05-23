@@ -4,12 +4,11 @@ interface
 
 uses
   System.SysUtils, System.Classes, Providers.Connection, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
-  FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
-  FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
-  FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Phys.IBBase, DataSet.Serialize, System.JSON;
+  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
+  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.Client, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Phys.IBBase, DataSet.Serialize, System.JSON;
 
 type
   TServicesPerson = class(TProviderConnection)
@@ -33,12 +32,17 @@ uses
 {$R *.dfm}
 { TServicesPerson }
 
+{$REGION ' Delete'}
+
 function TServicesPerson.Delete(const AId: Int64): Boolean;
 begin
   FDQuery.Delete;
 
   Result := FDQuery.IsEmpty;
 end;
+{$ENDREGION}
+
+{$REGION ' GetById'}
 
 function TServicesPerson.GetById(const AId: Int64): TFDQuery;
 begin
@@ -48,6 +52,9 @@ begin
 
   Result := FDQuery;
 end;
+{$ENDREGION}
+
+{$REGION ' Insert'}
 
 function TServicesPerson.Insert(const AProduct: TJSONObject): TFDQuery;
 var
@@ -69,6 +76,9 @@ begin
     UtilitiesFacade.Destroy;
   end;
 end;
+{$ENDREGION}
+
+{$REGION ' ListAll'}
 
 function TServicesPerson.ListAll: TFDQuery;
 begin
@@ -77,6 +87,9 @@ begin
 
   Result := FDQuery;
 end;
+{$ENDREGION}
+
+{$REGION ' Update'}
 
 function TServicesPerson.Update(const AProduct: TJSONObject): TFDQuery;
 begin
@@ -84,5 +97,7 @@ begin
 
   Result := FDQuery;
 end;
+{$ENDREGION}
 
 end.
+

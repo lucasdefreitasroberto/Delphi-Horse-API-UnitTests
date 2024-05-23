@@ -6,7 +6,9 @@ uses
   Providers.Connection in '..\providers\Providers.Connection.pas' {ProviderConnection: TDataModule},
   services.person in '..\services\services.person.pas' {ServicesPerson: TDataModule},
   uController.Person in '..\controllers\uController.Person.pas',
-  utilities in '..\utilities\utilities.pas';
+  utilities in '..\utilities\utilities.pas',
+  HorseServer in '..\src\HorseServer.pas',
+  ServerControl in '..\src\ServerControl.pas';
 
 {$R *.res}
 
