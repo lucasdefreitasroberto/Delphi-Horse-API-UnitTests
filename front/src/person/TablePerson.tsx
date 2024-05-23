@@ -11,14 +11,19 @@ import {
 import { ButtonDelete } from "@/buttonAction/btnDelete";
 import { ButtonEdit } from "@/buttonAction/btnEdit";
 
+import manImage from '../../public/man.png';
+import womanImage from '../../public/woman.png';
+
+
 import api from "../service/api";
 import { useEffect, useState } from "react";
 
-const formatGender = (gender: string) => {
-  if (gender === "M") return "Masculino";
-  if (gender === "F") return "Feminino";
-  return gender;
+const getGenderImage = (gender: string) => {
+  if (gender === 'M') return manImage;
+  if (gender === 'F') return womanImage;
+  return null;
 };
+
 
 const formatType = (gender: string) => {
   if (gender === "F") return "Física";
@@ -58,6 +63,7 @@ export default function Grid() {
         console.error("Erro ao buscar a pessoa:", error);
       }
     };
+
     fetchData();
   }, []);
 
@@ -84,7 +90,8 @@ export default function Grid() {
             <TableRow key={p.id}>
               <TableCell className="font-medium">{p.id}</TableCell>
               <TableCell>{capitalizeWords(p.nome)}</TableCell>
-              <TableCell>{formatGender(p.sexo)}</TableCell>
+              {/* <TableCell>{(p.sexo)}</TableCell> */}
+              <TableCell><img src={getGenderImage(p.sexo)} alt={p.sexo === 'M' ? 'Man' : 'Woman'} width="32" height="32" /></TableCell>
               <TableCell>{formatType(p.tipo)}</TableCell>
               <TableCell>{p.cpfcnpj}</TableCell>
               <TableCell>{capitalizeWords(p.bairro)}</TableCell>
