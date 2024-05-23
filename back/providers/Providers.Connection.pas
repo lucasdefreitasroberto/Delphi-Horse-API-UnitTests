@@ -23,10 +23,6 @@ type
     procedure HandleConnectionError(E: Exception);
   public
     constructor Create; reintroduce;
-    function ExecuteScalar(SQL: string): Variant;
-    function ExecuteReader(SQL: string): OleVariant;
-    procedure ExecuteCommand(SQL: string; Parametros: array of Variant;
-      NomesParametrosSQL: array of string);
   end;
 
 var
@@ -45,36 +41,6 @@ end;
 procedure TProviderConnection.DataModuleCreate(Sender: TObject);
 begin
   Self.ConnectToDatabase();
-end;
-
-procedure TProviderConnection.ExecuteCommand(SQL: string;
-  Parametros: array of Variant; NomesParametrosSQL: array of string);
-begin
-  FDQuery.Close;
-  FDQuery.SQL.Text := SQL;
-
-  for var i := Low(Parametros) to High(Parametros) do
-    FDQuery.ParamByName(NomesParametrosSQL[i]).Value := Parametros[i];
-
-  FDQuery.ExecSQL;
-end;
-
-function TProviderConnection.ExecuteReader(SQL: string): OleVariant;
-begin
-  FDQuery.Close;
-  FDQuery.SQL.Text := SQL;
-  FDQuery.Open;
-
-  result := FDQuery.Data;
-end;
-
-function TProviderConnection.ExecuteScalar(SQL: string): Variant;
-begin
-  FDQuery.Close;
-  FDQuery.SQL.Text := SQL;
-  FDQuery.Open;
-
-  result := FDQuery.Fields[0].AsString;
 end;
 
 procedure TProviderConnection.ConnectToDatabase;

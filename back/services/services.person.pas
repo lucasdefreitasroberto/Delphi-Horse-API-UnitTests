@@ -1,4 +1,4 @@
-unit services.person;
+unit Services.Person;
 
 interface
 
@@ -26,6 +26,9 @@ var
 
 implementation
 
+uses
+  Utilities;
+
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
 { TServicesPerson }
@@ -47,18 +50,24 @@ begin
 end;
 
 function TServicesPerson.Insert(const AProduct: TJSONObject): TFDQuery;
+var
+  UtilitiesFacade: TUtilitiesFacade;
+  NextID: Integer;
 begin
-  var
-  id := StrToInt(ProviderConnection.ExecuteScalar
-    ('select max(P.ID) + 1 from PESSOA P'));
+  UtilitiesFacade.Create(ProviderConnection.con);
+  try
+    NextID := UtilitiesFacade.GetNextPessoaID;
 
-  FDQuery.SQL.Add('where 1 <> 1');
-  FDQuery.Open();
+    FDQuery.SQL.Add('where 1 <> 1');
+    FDQuery.Open();
 
-  AProduct.AddPair('id', id.ToString);
-  FDQuery.LoadFromJSON(AProduct, False);
+    AProduct.AddPair('id', NextID.ToString);
+    FDQuery.LoadFromJSON(AProduct, False);
 
-  Result := FDQuery;
+    Result := FDQuery;
+  finally
+    UtilitiesFacade.Destroy;
+  end;
 end;
 
 function TServicesPerson.ListAll: TFDQuery;
