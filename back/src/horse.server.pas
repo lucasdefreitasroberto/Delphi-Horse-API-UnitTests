@@ -1,9 +1,9 @@
-unit HorseServer;
+unit horse.server;
 
 interface
 
 uses
-  Horse, Horse.CORS, Horse.Jhonson, uController.Person;
+  Horse, Horse.CORS, Horse.Jhonson, uController.Person, middleware.global;
 
 type
   THorseServer = class

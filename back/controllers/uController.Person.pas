@@ -56,7 +56,7 @@ begin
     Res.Send<TJSONObject>(LService.Insert(Req.Body<TJSONObject>).ToJSONObject())
       .Status(THTTPStatus.Created);
   finally
-    LService.Free;
+   LService.Free;
   end;
 
 end;
@@ -76,8 +76,7 @@ begin
     if LService.GetById(id).IsEmpty then
       raise EHorseException.New.Error('Not found').Status(THTTPStatus.NotFound);
 
-    Res.Send<TJSONObject>(LService.Update(Req.Body<TJSONObject>)
-      .ToJSONObject());
+    Res.Send<TJSONObject>(LService.Update(Req.Body<TJSONObject>).ToJSONObject());
   finally
     LService.Free;
   end;
@@ -87,21 +86,26 @@ end;
 {$REGION ' DoDeletePerson'}
 
 procedure DoDeletePerson(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+var
+  LService : TServicesPerson;
 begin
-  var
   LService := TServicesPerson.Create;
   try
     var
-    id := Req.Params['id'].ToInt64;
+      id := Req.Params['id'].ToInt64;
 
     if LService.GetById(id).IsEmpty then
       raise EHorseException.New.Error('Not found').Status(THTTPStatus.NotFound);
 
     if LService.Delete(id) then
-      Res.Status(THTTPStatus.NoContent);
+    begin
+      Res.Send('Deleted successfully').Status(THTTPStatus.NoContent);
+    end;
+
   finally
     LService.Free;
   end;
+
 end;
 {$ENDREGION}
 

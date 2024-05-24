@@ -8,8 +8,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.Client, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Phys.IBBase, Vcl.Dialogs, System.JSON,
-  DataSet.Serialize;
+  FireDAC.Comp.DataSet, FireDAC.Phys.IBBase, Vcl.Dialogs, System.JSON;
 
 type
   TProviderConnection = class(TDataModule)

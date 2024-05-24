@@ -1,4 +1,4 @@
-unit ServerControl;
+unit server.control;
 
 interface
 
@@ -13,7 +13,7 @@ type
 implementation
 
 uses
-  HorseServer;
+  horse.server;
 
 class procedure TServerControl.StartServer(Port: Integer);
 begin

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{BCC4F505-3BF8-4D8A-9ABD-52077EA3AF71}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="dproj\backend.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\testback\Testsback.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="backend">
+        <MSBuild Projects="dproj\backend.dproj"/>
+    </Target>
+    <Target Name="backend:Clean">
+        <MSBuild Projects="dproj\backend.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="backend:Make">
+        <MSBuild Projects="dproj\backend.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Testsback">
+        <MSBuild Projects="..\testback\Testsback.dproj"/>
+    </Target>
+    <Target Name="Testsback:Clean">
+        <MSBuild Projects="..\testback\Testsback.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Testsback:Make">
+        <MSBuild Projects="..\testback\Testsback.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="backend;Testsback"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="backend:Clean;Testsback:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="backend:Make;Testsback:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -26,7 +26,7 @@ var
 implementation
 
 uses
-  Utilities;
+  Person;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
@@ -56,15 +56,14 @@ end;
 
 {$REGION ' Insert'}
 
-function TServicesPerson.Insert(const AProduct: TJSONObject): TFDQuery;
-var
-  UtilitiesFacade: TUtilitiesFacade;
-  NextID: Integer;
+function TServicesPerson.Insert(const AProduct: TJSONObject): TFDQuery;   //   UpperCase(AProduct.Value);
 begin
-  UtilitiesFacade.Create(ProviderConnection.con);
-  try
-    NextID := UtilitiesFacade.GetNextPessoaID;
+ var Person := TPerson.Create;
 
+  try
+    var NextID := Person.GetNextPersonID;
+
+    NextID := 3;
     FDQuery.SQL.Add('where 1 <> 1');
     FDQuery.Open();
 
@@ -73,7 +72,7 @@ begin
 
     Result := FDQuery;
   finally
-    UtilitiesFacade.Destroy;
+    Person.Free;
   end;
 end;
 {$ENDREGION}
