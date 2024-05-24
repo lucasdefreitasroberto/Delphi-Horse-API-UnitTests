@@ -1,6 +1,3 @@
-Certainly! Here is the improved README file with comprehensive details about the backend API and testing setup:
-
----
 
 # Delphi Backend Application with Horse Framework :globe_with_meridians:
 
