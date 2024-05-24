@@ -1,4 +1,4 @@
-program Testsback;
+program Tests;
 {
 
   Delphi DUnit Test Project

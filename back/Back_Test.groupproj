@@ -6,7 +6,7 @@
         <Projects Include="dproj\backend.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\testback\Testsback.dproj">
+        <Projects Include="..\testback\Tests.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -26,23 +26,23 @@
     <Target Name="backend:Make">
         <MSBuild Projects="dproj\backend.dproj" Targets="Make"/>
     </Target>
-    <Target Name="Testsback">
-        <MSBuild Projects="..\testback\Testsback.dproj"/>
+    <Target Name="Tests">
+        <MSBuild Projects="..\testback\Tests.dproj"/>
     </Target>
-    <Target Name="Testsback:Clean">
-        <MSBuild Projects="..\testback\Testsback.dproj" Targets="Clean"/>
+    <Target Name="Tests:Clean">
+        <MSBuild Projects="..\testback\Tests.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="Testsback:Make">
-        <MSBuild Projects="..\testback\Testsback.dproj" Targets="Make"/>
+    <Target Name="Tests:Make">
+        <MSBuild Projects="..\testback\Tests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="backend;Testsback"/>
+        <CallTarget Targets="backend;Tests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="backend:Clean;Testsback:Clean"/>
+        <CallTarget Targets="backend:Clean;Tests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="backend:Make;Testsback:Make"/>
+        <CallTarget Targets="backend:Make;Tests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
