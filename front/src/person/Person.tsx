@@ -1,5 +1,6 @@
 import Filter from "./FilterPerson";
-import ButtonNewProduct from "./ButtonNewPerson";
+// import ButtonNewProduct from "./ButtonNewPerson";
+import NewPerson from "./NewPerson";
 import Grid from "./TablePerson";
 
 export default function FormProduct() {
@@ -8,7 +9,7 @@ export default function FormProduct() {
       <h1 className="text-3xl font-bold">Pessoa</h1>
       <div className="flex items-center justify-between">
         <Filter />
-        <ButtonNewProduct />
+        <NewPerson />
       </div>
       <Grid />
     </div>
