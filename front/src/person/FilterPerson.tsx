@@ -7,7 +7,7 @@ export default function Filter() {
       <input type="id" placeholder="ID da Pessoa" />
       <input type="pesspa" placeholder="Nome da Pessoa" />
       <Button type="submit" variant="outline">
-        <Search className="w-4 h-3 mr-2" />
+        <Search className="w-4 h-3 mr-2 " />
         Filtrar resultados
       </Button>
     </form>

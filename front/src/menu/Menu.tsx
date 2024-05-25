@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ModeToggle } from "../components/themeMenu";
+import { ModeToggle } from "../components/mode-toggle";
 import { MenubarTrigger } from "@radix-ui/react-menubar";
 
 import {
@@ -16,6 +16,7 @@ import {
 
 import Product from "../product/Product";
 import Person from "../person/Person";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export function Menu() {
   const [isProductFormVisible, setProductFormVisible] = useState(false);
@@ -70,7 +71,9 @@ export function Menu() {
             </Menubar>
           </div>
         </div>
-        <ModeToggle />
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <ModeToggle />
+        </ThemeProvider>
       </Menubar>
 
       {isProductFormVisible && <Product />}
