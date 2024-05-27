@@ -39,8 +39,8 @@ This project consists of a backend application built with Delphi using the Horse
 1. **Clone the repository:** :heavy_plus_sign:
 
     ```sh
-    git clone https://github.com/lucasdefreitasroberto/Delphi-Horse-API-UnitTests.git
-    cd Delphi-Horse-API-UnitTests
+    git clone https://github.com/lucasdefreitasroberto/DelphiHorseAPI-UnitTests.git
+    cd DelphiHorseAPI-UnitTests
     ```
 
 2. **Install dependencies:**
