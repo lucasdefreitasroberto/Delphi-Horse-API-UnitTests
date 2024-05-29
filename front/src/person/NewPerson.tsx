@@ -53,13 +53,13 @@ export default function NewPerson() {
 
     try {
       const response = await api.post("/person", {
-        nome: nome.toUpperCase(),
-        sexo: sexo.toUpperCase(),
-        tipo: tipo.toUpperCase(),
-        CPFCNPJ: CPFCNPJ.toUpperCase(),
-        bairro: bairro.toUpperCase(),
-        estado: estado.toUpperCase(),
-        cidade: cidade.toUpperCase(),        
+        nome: nome,
+        sexo: sexo,
+        tipo: tipo,
+        CPFCNPJ: CPFCNPJ,
+        bairro: bairro,
+        estado: estado,
+        cidade: cidade,        
         complemento: complemento
       });
 

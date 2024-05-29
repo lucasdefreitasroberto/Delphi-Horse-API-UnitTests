@@ -3,7 +3,7 @@ unit horse.server;
 interface
 
 uses
-  Horse, Horse.CORS, Horse.Jhonson, uController.Person, middleware.global;
+  Horse, Horse.CORS, Horse.Jhonson, Horse.Paginate, uController.Person, middleware.global;
 
 type
   THorseServer = class
@@ -19,8 +19,10 @@ implementation
 
 class procedure THorseServer.ConfigureMiddlewares;
 begin
-  THorse.Use(Jhonson());
-  THorse.Use(CORS);
+  THorse
+  .Use(Jhonson())
+  .Use(CORS)
+  .Use(Paginate);
 end;
 
 class procedure THorseServer.RegisterRoutes;

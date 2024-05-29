@@ -56,25 +56,52 @@ end;
 
 {$REGION ' Insert'}
 
-function TServicesPerson.Insert(const AProduct: TJSONObject): TFDQuery;   //   UpperCase(AProduct.Value);
+function TServicesPerson.Insert(const AProduct: TJSONObject): TFDQuery;
+var
+  ParamName: string;
+  ParamValue: string;
+  ModifiedJson: TJSONObject;
+  Person: TPerson;
 begin
- var Person := TPerson.Create;
-
+  ModifiedJson := TJSONObject.Create;
+  Person := TPerson.Create;
   try
-    var NextID := Person.GetNextPersonID;
+    // Iterar sobre os pares no JSON de entrada
+    for var Pair in AProduct do
+    begin
+      if Pair.JsonValue is TJSONString then
+      begin
+        ParamName := Pair.JsonString.Value;
+        ParamValue := TJSONString(Pair.JsonValue).Value;
+        ModifiedJson.AddPair(ParamName, TJSONString.Create(UpperCase(ParamValue)));
+      end
+      else
+      begin
+        ModifiedJson.AddPair(Pair.JsonString.Clone as TJSONString, Pair.JsonValue.Clone as TJSONValue);
+      end;
+    end;
 
-    NextID := 3;
+    // Adicionar o ID ao JSON modificado
+    var NextID := Person.GetNextPersonID;
+    ModifiedJson.AddPair('id', NextID.ToString);
+
+    // Preparar a consulta do FireDAC
     FDQuery.SQL.Add('where 1 <> 1');
     FDQuery.Open();
 
-    AProduct.AddPair('id', NextID.ToString);
-    FDQuery.LoadFromJSON(AProduct, False);
+    // Carregar o JSON modificado na consulta
+    FDQuery.LoadFromJSON(ModifiedJson, False);
 
+    // Retornar a consulta modificada
     Result := FDQuery;
+
   finally
+    // Liberar a memória usada pelo JSON modificado e pelo objeto Person
+    ModifiedJson.Free;
     Person.Free;
   end;
 end;
+
 {$ENDREGION}
 
 {$REGION ' ListAll'}
@@ -89,13 +116,42 @@ end;
 {$ENDREGION}
 
 {$REGION ' Update'}
-
 function TServicesPerson.Update(const AProduct: TJSONObject): TFDQuery;
+var
+  ParamName: string;
+  ParamValue: string;
+  ModifiedJson: TJSONObject;
 begin
-  FDQuery.MergeFromJSONObject(AProduct, False);
+  // Criar o objeto JSON modificado
+  ModifiedJson := TJSONObject.Create;
+  try
+    // Iterar sobre os pares no JSON de entrada
+    for var Pair in AProduct do
+    begin
+      if Pair.JsonValue is TJSONString then
+      begin
+        ParamName := Pair.JsonString.Value;
+        ParamValue := TJSONString(Pair.JsonValue).Value;
+        ModifiedJson.AddPair(ParamName, TJSONString.Create(UpperCase(ParamValue)));
+      end
+      else
+      begin
+        ModifiedJson.AddPair(Pair.JsonString.Clone as TJSONString, Pair.JsonValue.Clone as TJSONValue);
+      end;
+    end;
 
-  Result := FDQuery;
+    // Chamar o método de atualização do FireDAC com o JSON modificado
+    FDQuery.MergeFromJSONObject(ModifiedJson, False);
+
+    // Retornar a consulta modificada
+    Result := FDQuery;
+
+  finally
+    // Liberar a memória usada pelo JSON modificado
+    ModifiedJson.Free;
+  end;
 end;
+
 {$ENDREGION}
 
 end.

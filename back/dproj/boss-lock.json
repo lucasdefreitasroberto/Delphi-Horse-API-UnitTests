@@ -2,6 +2,14 @@
 	"hash": "d41d8cd98f00b204e9800998ecf8427e",
 	"updated": "2024-05-19T23:26:08.338037-03:00",
 	"installedModules": {
+		"github.com/bittencourtthulio/horse-paginate": {
+			"name": "horse-paginate",
+			"version": "1.0.5",
+			"hash": "a97e84bd40cc4bf1000901047003e486",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
 		"github.com/hashload/horse": {
 			"name": "horse",
 			"version": "3.1.6",
